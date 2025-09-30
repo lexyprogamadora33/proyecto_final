@@ -1,0 +1,16 @@
+services:
+  web:
+    build: 
+      context: . 
+      dockerfile: Dockerfile
+    ports:
+      - 5099:5000
+    volumes:
+      - .:/app
+      - db_volume:/app  # Persistencia específica para el .db (opcional, pero recomendado)
+    environment:
+      - APP_NAME=${APP_NAME}  # Mantén si lo necesitas
+      - DATABASE_URL=sqlite:////app/fashion_boutique.db  # Fuerza SQLite explícitamente (opcional, si quieres sobrescribir)
+
+volumes:
+  db_volume:  # Volumen para persistir el .db
